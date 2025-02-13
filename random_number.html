@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Random Number Generator with Hold Action</title>
+  <style>
+    #generate {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <button id="generate">Generate Number</button>
+  <p id="result"></p>
+
+  <script>
+    const btn = document.getElementById("generate");
+    const result = document.getElementById("result");
+
+    let startTime = 0;
+    const holdDuration = 2000; // 2 seconds in milliseconds
+
+    // Record the time when the button is pressed down
+    btn.addEventListener("mousedown", function () {
+      startTime = Date.now();
+    });
+
+    // When the button is released, check how long it was held
+    btn.addEventListener("mouseup", function () {
+      const holdTime = Date.now() - startTime;
+      if (holdTime >= holdDuration) {
+        // If held for 2 seconds or more, display the fixed number
+        result.textContent = 1089;
+      } else {
+        // If held for less than 3 seconds, generate a random number (0-9999)
+        const randomNumber = Math.floor(Math.random() * 10000);
+        result.textContent = randomNumber;
+      }
+    });
+
+    // Optional: Reset the startTime if the mouse leaves the button
+    btn.addEventListener("mouseleave", function () {
+      startTime = 0;
+    });
+  </script>
+</body>
+</html>
